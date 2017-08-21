@@ -5,6 +5,7 @@
 
 <body>
 <script>
+//Example illustrating the notion of air resistance
 //setup() run once at program start
 var setup = function() {
     createCanvas(600, 600);
@@ -13,7 +14,7 @@ var setup = function() {
 var ballRadius = 100;
 
 var ball = {
-    x:-300,
+    x:-300-ballRadius,
     y:10,
     xp:20,
     yp:0,
@@ -78,6 +79,8 @@ var draw = function() {
     ball.y += ball.yp * dt;
     fill(240, 40, 10);
     ellipse(300 + ball.x, 300 + ball.y, 2*ballRadius, 2*ballRadius);
+    stroke(255, 255, 255);
+    text("Speed: " + Math.round(Math.sqrt(ball.xp*ball.xp + ball.yp*ball.yp)*10)/10, 20, 20);
 }
 
 </script>
