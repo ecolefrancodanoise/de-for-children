@@ -1,0 +1,85 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+<script>
+//setup() run once at program start
+var setup = function() {
+    createCanvas(600, 600);
+}
+
+var ballRadius = 100;
+
+var ball = {
+    x:-300,
+    y:10,
+    xp:20,
+    yp:0,
+    m:5000,
+};
+
+var molecules = [];
+for (var i = 0; i < 80; ++i) {
+    molecules.push(
+        {
+            x:600*Math.random()-300,
+            y:600*Math.random()-300,
+            xp:15*Math.random()-5,
+            yp:15*Math.random()-5,
+            m:50,
+            size: 10,
+        });
+} 
+
+var dt=0.1;
+
+//draw() run repeatedly in a loop
+var draw = function() {
+    background(26, 19, 51);
+    for (var i = 0; i < molecules.length; ++i) {
+        var b1 = molecules[i];
+        var d = Math.sqrt((b1.x-ball.x)*(b1.x-ball.x) + (b1.y -ball.y)*(b1.y -ball.y));
+        console.log(d);
+        console.log(ball);
+        if (d < ballRadius) { // ball radius
+            var dotProductTerm = ((ball.xp - b1.xp) * (ball.x - b1.x) + (ball.yp - b1.yp) * (ball.y - b1.y)) / (d*d);
+            console.log(2 * b1.m / (ball.m +  b1.m) * dotProductTerm * ball.x);
+            console.log(ball.xp);
+            var vballx = ball.xp  - 2 * b1.m / (ball.m +  b1.m) * dotProductTerm * (ball.x - b1.x); 
+            var vbally = ball.yp  - 2 * b1.m / (ball.m +  b1.m) * dotProductTerm * (ball.y - b1.y); 
+            var v1x = b1.xp  - 2 * ball.m / (ball.m +  b1.m) * dotProductTerm * (b1.x - ball.x); 
+            var v1y = b1.yp  - 2 * ball.m / (ball.m +  b1.m) * dotProductTerm * (b1.y - ball.y); 
+            ball.xp = vballx;
+            ball.yp = vbally;
+            b1.xp = v1x;
+            b1.yp = v1y;
+        }
+        //molecules wrap around
+        if(b1.x < -300) {
+            b1.x = 300
+        }
+        if(b1.x > 300) {
+            b1.x = -300;
+        }
+        if(b1.y < -300) {
+            b1.y = 300;
+        }
+        if(b1.y > 300) {
+            b1.y = -300;
+        }
+        b1.x += b1.xp * dt;
+        b1.y += b1.yp * dt;        
+        fill(20, 144, 250);
+        ellipse(300 + b1.x, 300 + b1.y, b1.size, b1.size);
+    }
+    ball.x += ball.xp * dt;
+    ball.y += ball.yp * dt;
+    fill(240, 40, 10);
+    ellipse(300 + ball.x, 300 + ball.y, 2*ballRadius, 2*ballRadius);
+}
+
+</script>
+</body>
+</html>
