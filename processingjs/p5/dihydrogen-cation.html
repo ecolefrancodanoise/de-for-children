@@ -1,0 +1,82 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+<script>
+
+var bodies = [
+    //proton 1
+    {
+        x:-74e-12/2,
+        y:0,
+        xp:0,
+        yp:0,
+        m:1.7e-24,
+        charge: 1.6e-19,
+        size: 10,
+    },
+    //proton 2
+    {
+        x:74e-12/2,
+        y:0,
+        xp:0,
+        yp:0,
+        m:1.7e-24,
+        charge: 1.6e-19,
+        size: 10,
+    },
+    //elecron
+    {
+        x:0,
+        y:0,
+        xp:0.84 * 2.19e6,
+        yp:0.74 * 2.19e6,
+        m:9e-31,
+        charge: -1.6e-19,
+        size: 5,
+    },
+    
+];
+var setup = function() {
+    createCanvas(900, 600);
+    
+}
+
+var dt=0.5e-19;
+var ke = 8.99e9;
+var newPosition=function(b, bodies) {
+    var xpp = 0;
+    var ypp = 0;
+    for (var i = 0; i < bodies.length; ++i) {
+        var b1 = bodies[i];
+        if (b !== b1) {
+            var d = Math.sqrt((b1.x-b.x)*(b1.x-b.x) + (b1.y -b.y)*(b1.y -b.y));
+            xpp = xpp + ke*b1.charge*b.charge*(b.x-b1.x)/Math.pow(d, 3)/b.m;
+            ypp = ypp + ke*b1.charge*b.charge*(b.y-b1.y)/Math.pow(d, 3)/b.m;
+        }
+    }
+    b.yp=b.yp+ypp*dt;
+    b.xp=b.xp+xpp*dt;
+    b.x=b.x+b.xp*dt;
+    b.y=b.y+b.yp*dt;
+    return b;
+};
+var scaleFactor = 100/(74e-12/2);
+
+draw = function() {
+    background(26, 19, 51);
+
+    for (var i = 0; i < bodies.length; ++i) {
+        var b1 = bodies[i];
+        fill(b1.color);
+        ellipse(200 + b1.x*scaleFactor, 200 + b1.y*scaleFactor, b1.size, b1.size);
+        b1 = newPosition(b1, bodies);
+    }
+
+};
+
+</script>
+</body>
+</html>
