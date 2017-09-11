@@ -9,11 +9,18 @@
 var bodies = [
     //proton 1
     {
+    //Here is where define proton1's parameters
+        //The x axis
         x:-74e-12/2,
+        //The x axiz
         y:0,
+        //The speed in x axis
         xp:0,
+        //The speed in y axis
         yp:0,
+        //The mass
         m:1.7e-24,
+        //The charge(positiv)
         charge: 1.6e-19,
         size: 10,
     },
@@ -24,16 +31,18 @@ var bodies = [
         xp:0,
         yp:0,
         m:1.7e-24,
+        //The charge(positiv)
         charge: 1.6e-19,
         size: 10,
     },
-    //elecron
+    //electron
     {
         x:0,
         y:0,
         xp:0.84 * 2.19e6,
         yp:0.74 * 2.19e6,
         m:9e-31,
+        //The charge(negativ because it's a electron)
         charge: -1.6e-19,
         size: 5,
     },
@@ -44,30 +53,39 @@ var setup = function() {
     
 }
 
+//Time interval beween each state calculation
 var dt=0.5e-19;
+//Coulombs coefitient
 var ke = 8.99e9;
+//Function calculating new position every dt
 var newPosition=function(b, bodies) {
     var xpp = 0;
     var ypp = 0;
     for (var i = 0; i < bodies.length; ++i) {
         var b1 = bodies[i];
+        //Ignore pulling force from self
         if (b !== b1) {
             var d = Math.sqrt((b1.x-b.x)*(b1.x-b.x) + (b1.y -b.y)*(b1.y -b.y));
+            //Acceleration calculation or change of the change of the state
             xpp = xpp + ke*b1.charge*b.charge*(b.x-b1.x)/Math.pow(d, 3)/b.m;
             ypp = ypp + ke*b1.charge*b.charge*(b.y-b1.y)/Math.pow(d, 3)/b.m;
         }
     }
+    //Speed(change of the state per time unit) calculation
     b.yp=b.yp+ypp*dt;
     b.xp=b.xp+xpp*dt;
+    //Updating the state
     b.x=b.x+b.xp*dt;
     b.y=b.y+b.yp*dt;
     return b;
 };
+//Drawing making the atoms visible(making them bigger)
 var scaleFactor = 100/(74e-12/2);
 
+//Here is where you draw the protons and electrons according to the parameters described above
 draw = function() {
     background(26, 19, 51);
-
+    //For every bodie draw them and calculate there new position
     for (var i = 0; i < bodies.length; ++i) {
         var b1 = bodies[i];
         fill(b1.color);
