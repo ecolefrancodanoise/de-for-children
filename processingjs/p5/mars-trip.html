@@ -1,0 +1,79 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+
+<script>
+
+//mars
+var mars = {
+    size:10,
+    x:227.9e9,
+    y:0,
+    xp:0,
+    yp:-86.871e6/3600,
+    m:6.39e23
+};
+
+//jorden
+var jorden={
+    size:18,
+    x:-149.6e9,
+    y:0,
+    xp:0,
+    yp:3e4,
+    m:5.972e24
+};
+//solen
+var solen={
+    size:40,
+    x:0,
+    y:0,
+    xp:0,
+    yp:0,
+    m:1.989e30
+};
+
+var planets = [jorden, mars, solen];
+
+var dt=1e5;
+var G= 6.67408e-11;
+var newPosition=function(b, allPlanets) {
+
+    var xpp = 0;
+    var ypp = 0;
+    for (var i = 0; i < allPlanets.length; i+=1) {
+        var b1 = allPlanets[i];
+        if (b === b1) {
+            continue;
+        }
+        var d1=Math.sqrt((b1.x-b.x)*(b1.x-b.x) + (b1.y -b.y)*(b1.y -b.y));
+        xpp += -G*b1.m*(b.x-b1.x)/Math.pow(d1, 3);
+        ypp += -G*b1.m*(b.y-b1.y)/Math.pow(d1, 3);
+    }
+
+    b.yp=b.yp+ypp*dt;
+    b.xp=b.xp+xpp*dt;
+    b.x=b.x+b.xp*dt;
+    b.y=b.y+b.yp*dt;
+    return b;
+};
+
+var setup = function() {
+    createCanvas(1280, 600);
+}
+draw = function() {
+    background(26, 19, 51);
+    
+    for (var i = 0; i < planets.length; i++) {
+        fill(255,0,255);
+        ellipse(200 + planets[i].x/2e9, 200 + planets[i].y/2e9, planets[i].size , planets[i].size);
+        planets[i]=newPosition(planets[i], planets);
+    }
+};
+
+</script>
+</body>
+</html>
