@@ -1,0 +1,87 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+
+<script>
+//Equation: f'' = - 500 * f / norm(f) / norm(f)^2
+//Earth
+var xe = 77; //initial position
+var ye = 72;
+var xpe = -5;//initial velocity
+var ype = 4;
+var dte = 0.1; //time difference between each update
+
+//mars
+var xm = 172; //initial position
+var ym = 72;
+var xpm = -5;//initial velocity
+var ypm = 4;
+var dtm = 0.1; //time difference between each update
+
+//Jupiter
+var xj = 194; //initial position
+var yj = 71;
+var xpj = -5;//initial velocity
+var ypj = 4;
+var dtj = 0.1; //time difference between each update
+
+var setup = function() {
+    createCanvas(1280, 600);
+}
+
+
+draw = function() { //draw() - a built-in continuously looping function (ProcessingJS)
+   background(0, 170, 255);
+   line(200, 400, 200, 0);
+   line(0, 200, 400, 200);
+   fill(255, 217, 0);
+   ellipse(200 , 200 , 62, 68);
+   //earth
+   var distancee = Math.sqrt(xe * xe + ye * ye);
+   var xppe = - 5000 * xe / distancee / Math.pow(distancee,2); //acceleration
+   var yppe = - 5000* ye / distancee / Math.pow(distancee,2);
+   xpe = xpe + xppe * dte; //integrating the acceleration into the velocity
+   ype = ype + yppe * dte;
+   xe = xe + xpe *dte; //integrating the velocity into the position
+   ye = ye + ype *dte;
+   
+   fill(68, 219, 83);
+   ellipse(200+xe, 200+ye, 46,49);
+   //fill(237, 111, 38);
+   //ellipse(50+ x, 50 + y, 46, 55);
+   //fill(5, 85, 125);
+   
+   
+// Mars
+   var distancem = Math.sqrt(xm * xm + ym * ym);
+   var xppm= - 5000 * xm / distancem / Math.pow(distancem,2); //acceleration
+   var yppm = - 5000* ym / distancem / Math.pow(distancem,2);
+   xpm = xpm + xppm * dtm; //integrating the acceleration into the velocity
+   ypm  = ypm + yppm * dtm;
+   xm = xm + xpm *dtm; //integrating the velocity into the position
+   ym = ym + ypm *dtm;
+   fill(237, 111, 38);
+   ellipse(200+ xm, 200 + ym, 55, 61);
+   fill(5, 85, 125);
+
+   //Jupiter
+   var distancej = Math.sqrt(xj * xj + yj * yj);
+   var xppj= - 5000 * xj / distancej / Math.pow(distancej,2); //acceleration
+   var yppj = - 5000* yj / distancej / Math.pow(distancej,2);
+   xpj = xpj + xppj * dtj;
+   ypj  = ypj + yppj * dtj;
+   xj = xj + xpj *dtj; //integrating the velocity into the position
+   yj= yj + ypj *dtj;
+   
+   fill(33, 100, 173);
+   ellipse(200+ xj,  200 + yj, 52, 50);
+   //fill(5, 85, 125);
+   
+   };
+
+</script>
+</body>
+</html>
