@@ -17,6 +17,16 @@ var mars = {
     m:6.39e23
 };
 
+//raket
+var raket = {
+    size:5,
+    x:-150.6e9,
+    y:0,
+    xp:0-2000,
+    yp:3e4+2000,
+    m:10e5
+};
+
 //jorden
 var jorden={
     size:18,
@@ -36,8 +46,7 @@ var solen={
     m:1.989e30
 };
 
-var planets = [jorden, mars, solen];
-
+var planets = [raket, jorden, mars, solen];
 var dt=1e5;
 var G= 6.67408e-11;
 var newPosition=function(b, allPlanets) {
@@ -65,7 +74,7 @@ var setup = function() {
     createCanvas(1280, 600);
 }
 draw = function() {
-    background(26, 19, 51);
+    background(0, 255, 0);
     
     for (var i = 0; i < planets.length; i++) {
         fill(255,0,255);
