@@ -17,16 +17,6 @@ var mars = {
     m:6.39e23
 };
 
-//raket
-var raket = {
-    size:5,
-    x:-150.6e9,
-    y:0,
-    xp:0-2000,
-    yp:3e4+2000,
-    m:10e5
-};
-
 //jorden
 var jorden={
     size:18,
@@ -46,9 +36,11 @@ var solen={
     m:1.989e30
 };
 
-var planets = [raket, jorden, mars, solen];
-var dt=1e5;
-var G= 6.67408e-11;
+var planets = [jorden, mars, solen];
+var t = 0;
+var dt =1e5;
+var launchTime = 376e5;
+var G = 6.67408e-11;
 var newPosition=function(b, allPlanets) {
 
     var xpp = 0;
@@ -58,6 +50,8 @@ var newPosition=function(b, allPlanets) {
         if (b === b1) {
             continue;
         }
+
+
         var d1=Math.sqrt((b1.x-b.x)*(b1.x-b.x) + (b1.y -b.y)*(b1.y -b.y));
         xpp += -G*b1.m*(b.x-b1.x)/Math.pow(d1, 3);
         ypp += -G*b1.m*(b.y-b1.y)/Math.pow(d1, 3);
@@ -74,8 +68,23 @@ var setup = function() {
     createCanvas(1280, 600);
 }
 draw = function() {
+    t = t + dt
+    if (t > launchTime && t - dt <= launchTime) {
+        //raket
+        var raket = {
+            size:5,
+            x:jorden.x-10e5,
+            y:jorden.y+10e5,
+            xp:jorden.xp-200e2,
+            yp:jorden.yp+1.3e4,
+            m:10e5,
+        };
+        planets.push(raket);
+    }
     background(0, 255, 0);
     
+    text("Time:" + t, 10, 10);
+
     for (var i = 0; i < planets.length; i++) {
         fill(255,0,255);
         ellipse(200 + planets[i].x/2e9, 200 + planets[i].y/2e9, planets[i].size , planets[i].size);
