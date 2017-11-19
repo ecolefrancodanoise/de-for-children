@@ -37,9 +37,11 @@ var solen={
 };
 
 var planets = [jorden, mars, solen];
+var t = 0;
+var dt =1e5;
+var launchTime = 376e5;
+var G = 6.67408e-11;
 
-var dt=1e5;
-var G= 6.67408e-11;
 var newPosition=function(b, allPlanets) {
 
     var xpp = 0;
@@ -53,6 +55,11 @@ var newPosition=function(b, allPlanets) {
         xpp += -G*b1.m*(b.x-b1.x)/Math.pow(d1, 3);
         ypp += -G*b1.m*(b.y-b1.y)/Math.pow(d1, 3);
     }
+    if(b.brakeAccel) {
+        var v = Math.sqrt((b.xp-mars.xp)*(b.xp-mars.xp) + (b.yp-mars.yp)*(b.yp-mars.yp));
+        xpp += -(b.xp-mars.xp) / v * b.brakeAccel(t);
+        ypp += -(b.yp-mars.yp) / v * b.brakeAccel(t);
+    }
 
     b.yp=b.yp+ypp*dt;
     b.xp=b.xp+xpp*dt;
@@ -64,13 +71,53 @@ var newPosition=function(b, allPlanets) {
 var setup = function() {
     createCanvas(1280, 600);
 }
+
 draw = function() {
-    background(26, 19, 51);
-    
+    t = t + dt;
+    if (t > launchTime && t - dt <= launchTime) {
+        //raket
+        var raket = {
+            size:5,
+            x:jorden.x-10e5,
+            y:jorden.y+10e5,
+            xp:jorden.xp-200e2,
+            yp:jorden.yp+1.2788e4,
+            m:10e5,
+            brakeStart:432e5,
+            brakeEnd:458.0e5,
+            brakeAccel:function(t){
+                    if(t >= this.brakeStart && t <= this.brakeEnd) {
+                        return 0.00467;
+                    } else{
+                        return 0;
+                    }
+                }
+        };
+        planets.push(raket);
+    }
+    if ( t == 420e5) {
+        dt = dt/10;
+    }
+    if ( t == 462e5) {
+        dt = dt/10;
+    }
+    if ( t == 465e5) {
+        dt = dt/5;
+    }
+    background(0, 255, 0);
+    text("Time:" + t, 10, 10);
+
     for (var i = 0; i < planets.length; i++) {
         fill(255,0,255);
         ellipse(200 + planets[i].x/2e9, 200 + planets[i].y/2e9, planets[i].size , planets[i].size);
         planets[i]=newPosition(planets[i], planets);
+    }
+    fill(0, 0, 0);
+    rect(300, 300, 100, 100);
+    fill(255, 200, 0)
+    ellipse(350, 350, mars.size*2, mars.size*2);
+    if(planets.length == 4) {
+        ellipse(350 + planets[3].x/1e6 - mars.x/1e6, 350 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*2, planets[3].size*2);
     }
 };
 
