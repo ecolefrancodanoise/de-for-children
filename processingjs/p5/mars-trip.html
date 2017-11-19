@@ -15,6 +15,7 @@ var mars = {
     xp:0,
     yp:-86.871e6/3600,
     m:6.39e23
+
 };
 
 //jorden
@@ -70,6 +71,9 @@ var newPosition=function(b, allPlanets) {
 
 var setup = function() {
     createCanvas(1280, 600);
+    mars.color = color(255, 160, 0);
+    jorden.color = color(0, 200, 0);
+    solen.color = color(255, 210, 0);
 }
 
 draw = function() {
@@ -83,6 +87,7 @@ draw = function() {
             xp:jorden.xp-200e2,
             yp:jorden.yp+1.2788e4,
             m:10e5,
+            color:color(190, 190, 190),
             brakeStart:432e5,
             brakeEnd:458.0e5,
             brakeAccel:function(t){
@@ -104,20 +109,23 @@ draw = function() {
     if ( t == 465e5) {
         dt = dt/5;
     }
-    background(0, 255, 0);
+    background(0, 0, 0);
+    stroke(255, 255, 255);
     text("Time:" + t, 10, 10);
+    text("Dt time:" + dt, 10, 30    );
 
     for (var i = 0; i < planets.length; i++) {
-        fill(255,0,255);
+        fill(planets[i].color);
         ellipse(200 + planets[i].x/2e9, 200 + planets[i].y/2e9, planets[i].size , planets[i].size);
         planets[i]=newPosition(planets[i], planets);
     }
-    fill(0, 0, 0);
-    rect(300, 300, 100, 100);
-    fill(255, 200, 0)
-    ellipse(350, 350, mars.size*2, mars.size*2);
+    fill(0, 0, 40);
+    rect(640, 0, 640, 720);
+    fill(mars.color);
+    ellipse(960, 300, mars.size*2, mars.size*2);
     if(planets.length == 4) {
-        ellipse(350 + planets[3].x/1e6 - mars.x/1e6, 350 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*2, planets[3].size*2);
+        fill(planets[3].color);
+        ellipse(960 + planets[3].x/1e6 - mars.x/1e6, 300 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*2, planets[3].size*2);
     }
 };
 
