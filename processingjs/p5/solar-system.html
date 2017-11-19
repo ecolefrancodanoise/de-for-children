@@ -1,0 +1,173 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+
+<script>
+
+   var setup = function() {
+    createCanvas(1280, 600);
+};
+
+var sunx=600;var suny=200;
+
+var dt = 0.1;
+
+//Equation: f'' = - 500 * f / norm(f) / norm(f)^2
+//Earth
+var xe = -77; //initial position
+var ye = -72;
+var xpe = -7;//initial velocity
+var ype = 4;
+  
+//Neptune 
+var xn = 77; //initial position
+var yn = 72;
+var xpn = -5;//initial velocity
+var ypn = 4;
+
+//mars
+var xm = 70; //initial position
+var ym = 172;
+var xpm = -5;//initial velocity
+var ypm = 4;
+
+//Uranus
+var xu = 87; //initial position
+var yu = 40;
+var xpu = -5;//initial velocity
+var ypu = 6;
+
+//Jupiter
+var xj = -96; //initial position
+var yj = -71;
+var xpj = 5;//initial velocity
+var ypj = -4;
+
+//Mercur
+var xr = -91; //initial position
+var yr = 71;
+var xpr = -5;//initial velocity
+var ypr = 4;
+
+//Venus
+var xv = 124; //initial position
+var yv = -72;
+var xpv = -5;//initial velocity
+var ypv = 4;
+
+//Saturn
+var xs = -90; //initial position
+var ys = -172;
+var xps = 5;//initial velocity
+var yps = -4;
+
+draw = function() { //draw() - a built-in continuously looping function (ProcessingJS)
+   background(0, 170, 255);
+   line(sunx, 400, sunx, 0);
+   line(0, suny, 400, suny);
+   fill(255, 217, 0);
+   ellipse(sunx , suny, 62, 68);
+   //earth
+   var distancee = Math.sqrt(xe * xe + ye * ye);
+   var xppe = - 5000 * xe / distancee / Math.pow(distancee,2); //acceleration
+   var yppe = - 5000* ye / distancee / Math.pow(distancee,2);
+   xpe = xpe + xppe * dt; //integrating the acceleration into the velocity
+   ype = ype + yppe * dt;
+   xe = xe + xpe *dt; //integrating the velocity into the position
+   ye = ye + ype *dt;
+   fill(100, 111, 255);
+   ellipse(sunx + xe, suny + ye, 57, 61);
+     
+
+  
+   
+// Mars
+   var distancem = Math.sqrt(xm * xm + ym * ym);
+   var xppm= - 5000 * xm / distancem / Math.pow(distancem,2); //acceleration
+   var yppm = - 5000* ym / distancem / Math.pow(distancem,2);
+   xpm = xpm + xppm * dt; //integrating the acceleration into the velocity
+   ypm  = ypm + yppm * dt;
+   xm = xm + xpm *dt; //integrating the velocity into the position
+   ym = ym + ypm *dt;
+   fill(237, 111, 38);
+   ellipse(sunx + xm, suny + ym, 57, 61);
+   
+   
+   
+   //Jupiter
+   var distancej = Math.sqrt(xj * xj + yj * yj);
+   var xppj= - 5000 * xj / distancej / Math.pow(distancej,2); //acceleration
+   var yppj = - 5000* yj / distancej / Math.pow(distancej,2);
+   xpj = xpj + xppj * dt;
+   ypj  = ypj + yppj * dt;
+   xj = xj + xpj *dt; //integrating the velocity into the position
+   yj= yj + ypj *dt;
+   fill(33, 100, 173);
+   ellipse(sunx + xj, suny + yj, 53, 51);
+   
+   //Mercur
+   var distancer = Math.sqrt(xr * xr + yr * yr);
+   var xppr= - 5000 * xr / distancer / Math.pow(distancer,2); //acceleration
+   var yppr = - 5000* yr / distancer / Math.pow(distancer,2);
+   xpr = xpr + xppr * dt;
+   ypr  = ypr + yppr * dt;
+   xr = xr + xpr *dt; //integrating the velocity into the position
+   yr= yr + ypr *dt;
+   fill(61, 19, 19);
+   ellipse(sunx + xr,  suny + yr, 52, 50);
+   
+   
+   //Uranus
+   var distanceu = Math.sqrt(xu * xu + yu * yu);
+   var xppu = - 5000 * xu / distanceu / Math.pow(distanceu,2); //acceleration
+   var yppu = - 5000* yu / distanceu / Math.pow(distanceu,2);
+   xpu = xpu + xppu * dt; 
+   ypu = ypu + yppu * dt;
+   xu = xu + xpu *dt; //integrating the velocity into the position
+   yu = yu + ypu *dt;
+   fill(0, 38, 255);
+   ellipse(sunx+ xu, suny + yu, 48, 49);
+   
+   //Neptune
+   var distancen = Math.sqrt(xn * xn + yn * yn);
+   var xppv = - 5000 * xn / distancen / Math.pow(distancen,2); //acceleration
+   var yppn = - 5000* yn / distancen / Math.pow(distancen,2);
+   xpn = xpn + xppu * dt; 
+   ypn = ypn + yppu * dt;
+   xn = xn + xpu *dt; //integrating the velocity into the position
+   yn = yn + ypu *dt;
+   fill(41, 145, 219);
+   ellipse(sunx+ xn, suny + yn, 48, 45);
+   
+   //Saturn
+   var distances = Math.sqrt(xn * xn + yn * yn);
+   var xpps = - 5000 * xs / distances / Math.pow(distances,2); //acceleration
+   var ypps = - 5000* ys / distances / Math.pow(distances,2);
+   xps = xps + xpps * dt; 
+   yps = yps + ypps * dt;
+   xs = xs + xps *dt; //integrating the velocity into the position
+   ys = ys + yps *dt;
+   fill(135, 121, 39);
+   ellipse(sunx + xs, suny + ys, 48, 45);
+   
+   //Venus
+   var distancev = Math.sqrt(xv * xv + yv * yv);
+   var xppv = - 5000 * xv / distancev / Math.pow(distancev,2); //acceleration
+   var yppv = - 5000* yv / distancev / Math.pow(distancev,2);
+   xpv = xpv + xppv * dt; 
+   ypv = ypv + yppv * dt;
+   xv = xv + xpv *dt; //integrating the velocity into the position
+   yv = yv + ypv *dt;
+   fill(237, 227, 178);
+   ellipse(sunx+ xv, suny+ yv, 48, 45);
+ 
+
+ 
+};
+
+</script>
+</body>
+</html>

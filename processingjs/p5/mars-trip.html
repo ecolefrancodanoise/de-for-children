@@ -41,6 +41,7 @@ var t = 0;
 var dt =1e5;
 var launchTime = 376e5;
 var G = 6.67408e-11;
+
 var newPosition=function(b, allPlanets) {
 
     var xpp = 0;
@@ -118,7 +119,6 @@ draw = function() {
     if(planets.length == 4) {
         ellipse(350 + planets[3].x/1e6 - mars.x/1e6, 350 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*2, planets[3].size*2);
     }
-
 };
 
 </script>
