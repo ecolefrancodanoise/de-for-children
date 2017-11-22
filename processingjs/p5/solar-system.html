@@ -6,19 +6,21 @@
 <body>
 
 <script>
+    var sunpic
 
    var setup = function() {
     createCanvas(1280, 600);
+    sunpic= loadImage("planets/sun.png")
 };
 
-var sunx=600;var suny=200;
+var sunx=640;var suny=200;
 
 var dt = 0.1;
 
 //Equation: f'' = - 500 * f / norm(f) / norm(f)^2
 //Earth
 var xe = -77; //initial position
-var ye = -72;
+var ye = 72;
 var xpe = -7;//initial velocity
 var ype = 4;
   
@@ -69,7 +71,7 @@ draw = function() { //draw() - a built-in continuously looping function (Process
    line(sunx, 400, sunx, 0);
    line(0, suny, 400, suny);
    fill(255, 217, 0);
-   ellipse(sunx , suny, 62, 68);
+   image(sunpic, sunx , suny, 62, 68);
    //earth
    var distancee = Math.sqrt(xe * xe + ye * ye);
    var xppe = - 5000 * xe / distancee / Math.pow(distancee,2); //acceleration
@@ -92,7 +94,7 @@ draw = function() { //draw() - a built-in continuously looping function (Process
    ypm  = ypm + yppm * dt;
    xm = xm + xpm *dt; //integrating the velocity into the position
    ym = ym + ypm *dt;
-   fill(237, 111, 38);
+   fill(0, 0, 0);
    ellipse(sunx + xm, suny + ym, 57, 61);
    
    
