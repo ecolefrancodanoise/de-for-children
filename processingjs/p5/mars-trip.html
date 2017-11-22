@@ -4,7 +4,6 @@
 </head>
 
 <body>
-
 <script>
 
 //mars
@@ -81,7 +80,7 @@ draw = function() {
     if (t > launchTime && t - dt <= launchTime) {
         //raket
         var raket = {
-            size:5,
+            size:4,
             x:jorden.x-10e5,
             y:jorden.y+10e5,
             xp:jorden.xp-200e2,
@@ -110,9 +109,6 @@ draw = function() {
         dt = dt/5;
     }
     background(0, 0, 0);
-    stroke(255, 255, 255);
-    text("Time:" + t, 10, 10);
-    text("Dt time:" + dt, 10, 30    );
 
     for (var i = 0; i < planets.length; i++) {
         fill(planets[i].color);
@@ -122,10 +118,22 @@ draw = function() {
     fill(0, 0, 40);
     rect(640, 0, 640, 720);
     fill(mars.color);
-    ellipse(960, 300, mars.size*2, mars.size*2);
+    ellipse(960, 300, mars.size*1, mars.size*1);
+    //Text
+    stroke(255, 255, 255);
+    fill(255, 255, 255);
+    text("Time:" + t, 10, 10);
+    text("DT:" + dt, 10, 30    );
+    text("Solar System");
+    //Bigger text
+    textSize(32);
+    text("Solsystemet", 250, 30);
+    text("Mars Zoom", 250+640, 30);
+    stroke(0, 0, 0);
+
     if(planets.length == 4) {
         fill(planets[3].color);
-        ellipse(960 + planets[3].x/1e6 - mars.x/1e6, 300 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*2, planets[3].size*2);
+        ellipse(960 + planets[3].x/1e6 - mars.x/1e6, 300 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*1.3, planets[3].size*1.3);
     }
 };
 
