@@ -7,7 +7,7 @@
 
 <script>
 var canvasx= 1280; 
-var canvasy= 600;
+var canvasy= 800;
    var setup = function() {
     createCanvas(canvasx, canvasy);
     sunpic= loadImage("planets/sun.png")
@@ -23,83 +23,85 @@ var canvasy= 600;
  
 var sunx=canvasx/2;var suny=canvasy/2;
 
-var dt = 0.1;
+var dt = 3600*24;
 
 //earth
 var earth= {
-x:100,
-y:10,
-xp:-3,
-yp:100,
+x:149.6e9,
+y:0,
+xp:0,
+yp:30e3,
 
 }
 
 //Neptune
 var neptune= {
-x:50,
-y:20,
-xp:-5,
-yp:100,
+x:4.498e12,
+y:0,
+xp:0,
+yp:5.43e3,
 
 }
     
 
 //mars
 var mars= {
- x : 70,
- y : 172,
-xp : -5,
-yp : 4,
+ x : 227.9e9,
+ y : 0,
+xp : 0,
+yp : 24e3,
     
 }
 //Uranus
 var uranus= {
- x : 87,
- y : 40,
- xp: -5,
- yp: 6,
+ x : 2.871e12,
+ y : 0,
+ xp: 0,
+ yp: 24.607e3,
     
 }
 
 //Jupiter
 var jupiter ={
- x :-96,
- y :-71,
- xp:5,
- yp: 6,
+ x :778e9,
+ y :0,
+ xp:0,
+ yp: 13e3,
      
  }
 
 //Mercur
  var mercur= {
- x : -91, 
- y : 71,
- xp : -5,
- yp : 4,
+ x : 57.91e9, 
+ y : 0,
+ xp :0,
+ yp :47e3,
  
  }
 
 //Venus
  var venus= {
- x  : 124,
- y  :-72,
- xp : -5,
- yp : 4,
+ x  :108.2e9,
+ y  :0,
+ xp :0,
+ yp :35e3,
 
  }
 
 //Saturn
  var saturn= {
- x  : -90,
- y  :-172,
- xp : 5,
- yp : -4,
+ x  :1.429e12,
+ y  :0,
+ xp :0,
+ yp :9e3,
      
  }
 var updateplanet = function (planet) {
+   var G =6.7e-11;
+    var sunmass= 2e30;
    var distance = Math.sqrt(planet.x * planet.x + planet.y * planet.y);
-   var xpp = - 5000 * planet.x / distance / Math.pow(distance,2); //acceleration
-   var ypp = - 5000* planet.y / distance / Math.pow(distance,2);
+   var xpp = - G*sunmass * planet.x / distance / Math.pow(distance,2); //acceleration
+   var ypp = - G*sunmass* planet.y / distance / Math.pow(distance,2);
    planet.xp = planet.xp + xpp * dt; //integrating the acceleration into the velocity
    planet.yp = planet.yp + ypp * dt;
    planet.x = planet.x + planet.xp *dt; //integrating the velocity into the position
@@ -107,46 +109,50 @@ var updateplanet = function (planet) {
 }
     
 
+
+
 draw = function() { //draw() - a built-in continuously looping function (ProcessingJS)
-   background(0, 170, 255);
+   background(0, 50, 100);
    line(0, canvasy/2, canvasx, canvasy/2);
    line(canvasx/2, 0, canvasx/2, canvasy);
    fill(255, 217, 0);
-   image(sunpic, sunx -68/2, suny -68/2, 68, 68);
-      
+   image(sunpic, sunx -60/2, suny -60/2, 60, 60);
+   var scaleFactor=1e12/300;
     
 //earth
    updateplanet(earth);
    fill(255, 255, 255);
-   image(earthpic,sunx + earth.x, suny + earth.y, 41, 41);
-     
+   image(earthpic,sunx-40/2 + earth.x/scaleFactor, suny-40/2 + earth.y/scaleFactor, 40, 40);
+    
 
 // Mars
     updateplanet (mars) ;
-   image(marspic, sunx + mars.x, suny + mars.y, 57, 61);
+   image(marspic, sunx-60/2 + mars.x/scaleFactor, suny-60/2 + mars.y/scaleFactor, 40, 40);
    
 //Jupiter
     updateplanet (jupiter);
-    image(jupiterpic, sunx + jupiter.x, suny + jupiter.y, 50, 48);
-   
+    image(jupiterpic, sunx-60/2 + jupiter.x/scaleFactor, suny-60/2 + jupiter.y/scaleFactor, 50, 50);
+
 //Mercur
   updateplanet (mercur)
-  image(mercurpic,  sunx + mercur.x, suny + mercur.y, 38, 50);
+  image(mercurpic,  sunx-20/2 + mercur.x/scaleFactor, suny-20/2 + mercur.y/scaleFactor, 20, 20);
 
 //Uranus
   updateplanet (uranus)
-  image(uranuspic,  sunx + uranus.x, suny + uranus.y, 30, 40);
+  image(uranuspic,  sunx-40/2 + uranus.x/scaleFactor, suny-40/2 + uranus.y/scaleFactor, 40, 40);
    
    
 //Neptune
 updateplanet (neptune)
-image(neptunepic,  sunx + neptune.x, suny + neptune.y, 25, 35);
+image(neptunepic,  sunx-35/2 + neptune.x/scaleFactor, suny-35/2 + neptune.y/scaleFactor, 35, 35);
    
 //Saturn  
 updateplanet (saturn)
-image(saturnpic,  sunx + saturn.x, suny + saturn.y, 20, 30);
+image(saturnpic,  sunx-30/2 + saturn.x/scaleFactor, suny-30/2 + saturn.y/scaleFactor, 30, 30);
 //Venus
-image(venuspic,  sunx + venus.x, suny + venus.y, 15, 25);
+updateplanet (venus)
+image(venuspic,  sunx-42/2 + venus.x/scaleFactor, suny-42/2 + venus.y/scaleFactor, 42, 42);
+
 
  
 };
