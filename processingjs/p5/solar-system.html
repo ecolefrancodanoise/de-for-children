@@ -6,10 +6,10 @@
 <body>
 
 <script>
-    var sunpic
-
+var canvasx= 1280; 
+var canvasy= 600;
    var setup = function() {
-    createCanvas(1280, 600);
+    createCanvas(canvasx, canvasy);
     sunpic= loadImage("planets/sun.png")
     neptunepic= loadImage("planets/neptune")
     saturnpic= loadImage("planets/saturnx.png")
@@ -21,7 +21,7 @@
     venuspic= loadImage("planets/venus.png")  
 };
  
-var sunx=640;var suny=200;
+var sunx=canvasx/2;var suny=canvasy/2;
 
 var dt = 0.1;
 
@@ -109,13 +109,11 @@ var updateplanet = function (planet) {
 
 draw = function() { //draw() - a built-in continuously looping function (ProcessingJS)
    background(0, 170, 255);
-   line(sunx, 400, sunx, 0);
-   line(0, suny, 400, suny);
+   line(0, canvasy/2, canvasx, canvasy/2);
+   line(canvasx/2, 0, canvasx/2, canvasy);
    fill(255, 217, 0);
-   image(sunpic, sunx , suny, 62, 68);
-   
-    
-    
+   image(sunpic, sunx -68/2, suny -68/2, 68, 68);
+      
     
 //earth
    updateplanet(earth);
@@ -123,8 +121,6 @@ draw = function() { //draw() - a built-in continuously looping function (Process
    image(earthpic,sunx + earth.x, suny + earth.y, 41, 41);
      
 
-  
-   
 // Mars
     updateplanet (mars) ;
    image(marspic, sunx + mars.x, suny + mars.y, 57, 61);
