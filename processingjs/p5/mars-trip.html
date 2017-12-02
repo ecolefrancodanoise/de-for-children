@@ -84,11 +84,11 @@ draw = function() {
             x:jorden.x-10e5,
             y:jorden.y+10e5,
             xp:jorden.xp-200e2,
-            yp:jorden.yp+1.2788e4,
+            yp:jorden.yp+1.2780e4,
             m:10e5,
             color:color(190, 190, 190),
             brakeStart:432e5,
-            brakeEnd:458.0e5,
+            brakeEnd:459.0e5,
             brakeAccel:function(t){
                     if(t >= this.brakeStart && t <= this.brakeEnd) {
                         return 0.00467;
@@ -103,11 +103,8 @@ draw = function() {
     if ( t == 420e5) {
         dt = dt/10;
     }
-    if ( t == 462e5) {
-        dt = dt/10;
-    }
-    if ( t == 465e5) {
-        dt = dt/5;
+    if ( t == 455e5) {
+        dt = dt/50;
     }
     background(0, 0, 0);
 
