@@ -95,7 +95,8 @@ draw = function() {
                     } else{
                         return 0;
                     }
-                }
+                },
+            positionHistory:[]
         };
         planets.push(raket);
     }
@@ -118,7 +119,7 @@ draw = function() {
     fill(0, 0, 40);
     rect(640, 0, 640, 720);
     fill(mars.color);
-    ellipse(960, 300, mars.size*1, mars.size*1);
+    ellipse(960, 300, mars.size*1.5, mars.size*1.5);
     //Text
     stroke(255, 255, 255);
     fill(255, 255, 255);
@@ -133,7 +134,14 @@ draw = function() {
 
     if(planets.length == 4) {
         fill(planets[3].color);
-        ellipse(960 + planets[3].x/1e6 - mars.x/1e6, 300 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*1.3, planets[3].size*1.3);
+        ellipse(960 + planets[3].x/1e6 - mars.x/1e6, 300 + planets[3].y/1e6 - mars.y/1e6, planets[3].size*1.7, planets[3].size*1.7);
+        planets[3].positionHistory.push({x:planets[3].x,y:planets[3].y});
+        for (var i = 0; i < planets[3].positionHistory.length-1; i++){
+            var pos1 = planets[3].positionHistory[i];
+            var pos2 = planets[3].positionHistory[i+1];
+            stroke(255);
+            line(pos1. x/1e6 - mars.x/1e6+960, 300 + pos1.y/1e6 - mars.y/1e6,pos2.x/1e6 - mars.x/1e6+960, 300 + pos2.y/1e6 - mars.y/1e6);
+        }
     }
 };
 
