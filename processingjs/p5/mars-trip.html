@@ -6,10 +6,37 @@
 <body>
 <script>
 
-var mars;
-var jorden;
-var solen;
-var planets;
+//mars
+var mars = {
+    size:10,
+    x:227.9e9,
+    y:0,
+    xp:0,
+    yp:-86.871e6/3600,
+    m:6.39e23
+
+};
+
+//jorden
+var jorden={
+    size:18,
+    x:-149.6e9,
+    y:0,
+    xp:0,
+    yp:3e4,
+    m:5.972e24
+};
+//solen
+var solen={
+    size:40,
+    x:0,
+    y:0,
+    xp:0,
+    yp:0,
+    m:1.989e30
+};
+
+var planets = [jorden, mars, solen];
 var t = 0;
 var dt =1e5;
 var launchTime = 376e5;
@@ -43,39 +70,9 @@ var newPosition=function(b, allPlanets) {
 
 var setup = function() {
     createCanvas(1280, 600);
-    solen={
-        size:40,
-        x:0,
-        y:0,
-        xp:0,
-        yp:0,
-        m:1.989e30,
-    color:color(255, 210, 0)
-    };
-    jorden={
-        size:18,
-        x:-149.6e9,
-        y:0,
-        xp:0,
-        yp:3e4,
-        m:5.972e24,
-        color: color(0, 200, 0)
-    };
-    mars = {
-        size:10,
-        x:227.9e9,
-        y:0,
-        xp:0,
-        yp:-86.871e6/3600,
-        m:6.39e23,
-        color: color(255, 160, 0)
-    };
-    planets = [jorden, mars, solen];
-    t = 0;
-    dt =1e5;
-    launchTime = 376e5;
-    G = 6.67408e-11;
-
+    mars.color = color(255, 160, 0);
+    jorden.color = color(0, 200, 0);
+    solen.color = color(255, 210, 0);
 }
 
 draw = function() {
