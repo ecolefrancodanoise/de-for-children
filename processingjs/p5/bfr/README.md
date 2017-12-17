@@ -1,4 +1,4 @@
-# test-js
+# BFR
 
 A Quil sketch that simulates Earth, Mars, the Sun and SpaceX's BFR trip to Mars orbit.
 
