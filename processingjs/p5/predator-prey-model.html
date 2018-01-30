@@ -1,0 +1,35 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+
+<script>
+var canvasx= 1280; 
+var canvasy= 720;
+var predator = 10
+var prey = 10000;
+var alpha1 = 20;
+var beta = 0.001;
+var gamma = 2000;
+var delta = 0.25;
+var dt = 0.0001;
+var counter = 1;
+var setup = function() {
+    createCanvas(canvasx, canvasy);
+};
+var draw = function() {
+    counter = counter + 1;
+    ellipse(counter, prey/20, 1, 1);
+    stroke(255,0,0);
+    ellipse(counter, predator/20, 1, 1);
+    var dPrey = dt*(alpha1 * prey - beta * prey * predator);
+    var dPredator = dt*(delta * prey * predator - gamma * predator);
+    prey = prey + dPrey;
+    predator = predator + dPredator;
+    };
+
+</script>
+</body>
+</html>
