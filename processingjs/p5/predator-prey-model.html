@@ -8,17 +8,19 @@
 <script>
 var canvasx= 1280; 
 var canvasy= 720;
-var predator = 100;
-var prey = 10000;
-var alpha1 = 0.05;
-var beta = 1/10000;
-var gamma = 1/100;
-var delta = 1e-6;
-var dt = 1;
-var counter = 1;
+var predator = 1e2; //Number of Predators
+var prey = 1e4; //Number of Preys
+var alpha1 = 5e-2; //Number of new preys per day (per prey)
+var beta = 1e-4; //Number of preys eaten per day (per predator per prey)
+var gamma = 1e-2; //Predator death rate
+var delta = 1e-6; //Number of new predators per day (per predator per prey)
+var dt = 1; //Time step is one day
+var counter = 1; //Used for drawing the graph
+
 var setup = function() {
     createCanvas(canvasx, canvasy);
 };
+
 var draw = function() {
     counter = counter + 1;
     ellipse(counter/5, prey/20, 1, 1);
