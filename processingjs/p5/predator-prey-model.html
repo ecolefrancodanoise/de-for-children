@@ -8,28 +8,37 @@
 <script>
 var canvasx= 1280; 
 var canvasy= 720;
-var predator = 10
+var predator = 100;
 var prey = 10000;
-var alpha1 = 20;
-var beta = 0.001;
-var gamma = 2000;
-var delta = 0.25;
-var dt = 0.0001;
+var alpha1 = 0.05;
+var beta = 1/10000;
+var gamma = 1/100;
+var delta = 1e-6;
+var dt = 1;
 var counter = 1;
 var setup = function() {
     createCanvas(canvasx, canvasy);
 };
 var draw = function() {
     counter = counter + 1;
-    ellipse(counter, prey/20, 1, 1);
+    ellipse(counter/5, prey/20, 1, 1);
     stroke(255,0,0);
-    ellipse(counter, predator/20, 1, 1);
+    ellipse(counter/5, predator/20, 1, 1);
     var dPrey = dt*(alpha1 * prey - beta * prey * predator);
     var dPredator = dt*(delta * prey * predator - gamma * predator);
     prey = prey + dPrey;
     predator = predator + dPredator;
-    };
-
+    fill(255,255,255);
+    rect(1, 1, 250, 30);
+    stroke(0,0,0);
+    text("Prey="+Math.ceil(prey*1000)/1000, 10, 10);
+    stroke(255,0,0);
+    text("Predator ="+Math.ceil(predator*1000)/1000, 10, 30);
+    console.log("prey :" + prey + " predator :" +predator);
+    if (counter === 10000000) {
+        debugger
+    }
+};
 </script>
 </body>
 </html>
