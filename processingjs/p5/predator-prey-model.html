@@ -14,7 +14,8 @@ var alpha1 = 5e-2; //Number of new preys per day (per prey)
 var beta = 1e-4; //Number of preys eaten per day (per predator per prey)
 var gamma = 1e-2; //Predator death rate
 var delta = 1e-6; //Number of new predators per day (per predator per prey)
-var dt = 1; //Time step is one day
+var dt = 0.1; //Time step is one day
+var t = 0;
 var counter = 1; //Used for drawing the graph
 
 var setup = function() {
@@ -23,9 +24,10 @@ var setup = function() {
 
 var draw = function() {
     counter = counter + 1;
-    ellipse(counter/5, prey/20, 1, 1);
+    t = t + dt;
+    ellipse(t/5, canvasy-Math.log(prey)*50, 1, 1);
     stroke(255,0,0);
-    ellipse(counter/5, predator/20, 1, 1);
+    ellipse(t/5, canvasy-Math.log(predator)*50, 1, 1);
     var dPrey = dt*(alpha1 * prey - beta * prey * predator);
     var dPredator = dt*(delta * prey * predator - gamma * predator);
     prey = prey + dPrey;
@@ -41,6 +43,7 @@ var draw = function() {
         debugger
     }
 };
+
 </script>
 </body>
 </html>
