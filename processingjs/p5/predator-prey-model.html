@@ -16,32 +16,44 @@ var gamma = 1e-2; //Predator death rate
 var delta = 1e-6; //Number of new predators per day (per predator per prey)
 var dt = 0.1; //Time step is one day
 var t = 0;
-var counter = 1; //Used for drawing the graph
+
+var btnX = 600;
+var btnY = 10;
+var btnWidth = 130;
+var btnHeight = 30;
 
 var setup = function() {
     createCanvas(canvasx, canvasy);
 };
 
+mouseClicked = function() {
+    if (mouseX >= btnX && mouseX <= (btnX+btnWidth) &&
+             mouseY >= btnY && mouseY <= (btnY+btnHeight)) {
+             prey = prey / 5
+    }
+};
+
 var draw = function() {
-    counter = counter + 1;
     t = t + dt;
-    ellipse(t/5, canvasy-Math.log(prey)*50, 1, 1);
     stroke(255,0,0);
+    ellipse(t/5, canvasy-Math.log(prey)*50, 1, 1);
+    stroke(0,0,0);
     ellipse(t/5, canvasy-Math.log(predator)*50, 1, 1);
     var dPrey = dt*(alpha1 * prey - beta * prey * predator);
     var dPredator = dt*(delta * prey * predator - gamma * predator);
     prey = prey + dPrey;
     predator = predator + dPredator;
     fill(255,255,255);
-    rect(1, 1, 250, 30);
-    stroke(0,0,0);
-    text("Prey="+Math.ceil(prey*1000)/1000, 10, 10);
+    rect(1, 1, 250, 40);
     stroke(255,0,0);
-    text("Predator ="+Math.ceil(predator*1000)/1000, 10, 30);
-    console.log("prey :" + prey + " predator :" +predator);
-    if (counter === 10000000) {
-        debugger
-    }
+    text("Prey="+Math.ceil(prey*1000)/1000, 10, 15);
+    stroke(0,0,0);
+    text("Predator ="+Math.ceil(predator*1000)/1000, 10, 35);
+    //console.log("prey :" + prey + " predator :" +predator);
+    fill(240,240,240);
+    rect(btnX, btnY, btnWidth, btnHeight, 5);
+    text("Kill 50% of all preys",btnX + 15,btnY+20);
+
 };
 
 </script>
