@@ -5,17 +5,20 @@
 
 <body>
 <script>
-    
+
+var canvasWidth = 1200;
+var canvasHeight = 800;
+
 var atoms = [];
 for (var i = 0; i < 1000; i+=1) {
     var size = Math.ceil(Math.random()*7);
     atoms.push (
         {
             size:size,
-            x:Math.random()*1270,
-            y:Math.random()*600,
-            xp:0,
-            yp:0,
+            x:Math.random()*canvasWidth - canvasWidth / 2,
+            y:Math.random()*canvasHeight - canvasHeight / 2,
+            xp:Math.random()*100-50,
+            yp:Math.random()*100-50,
             m:1e3*size
         }
     );
@@ -69,17 +72,16 @@ var newPositions = function(allAtoms) {
 };
 
 var setup = function() {
-    createCanvas(1280, 600);
+    createCanvas(canvasWidth, canvasHeight);
 }
 
 draw = function() {
     background(0,0,0);
     for (var i = 0; i < atoms.length; i++) {
-        ellipse(atoms[i].x, atoms[i].y, atoms[i].size , atoms[i].size);
+        ellipse(atoms[i].x/10 + canvasWidth/2, atoms[i].y/10 + canvasHeight/2, Math.sqrt(atoms[i].size) , Math.sqrt(atoms[i].size));
     }
     atoms = newPositions(atoms);
     mergeCloseAtoms(atoms);
-    console.log(atoms.length);
 };
 
 </script>
