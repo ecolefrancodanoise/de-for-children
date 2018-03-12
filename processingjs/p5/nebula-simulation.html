@@ -8,23 +8,42 @@
     
 var atoms = [];
 for (var i = 0; i < 1000; i+=1) {
+    var size = Math.ceil(Math.random()*7);
     atoms.push (
         {
-            size:Math.random()*7,
+            size:size,
             x:Math.random()*1270,
             y:Math.random()*600,
             xp:0,
             yp:0,
-            m:1e3
+            m:1e3*size
         }
     );
 }
-console.log(Math.random()*800)
-var dt =0.1;
+
+var dt =0.01;
 var G = 1;
+var mergeCloseAtoms = function(allAtoms) {
+    for (var i = allAtoms.length-1; i >= 0; --i) {
+        for (var j = allAtoms.length-1; j > i; --j) {
+            if (i >= allAtoms.length) continue;
+            var dx = allAtoms[i].x - allAtoms[j].x;
+            var dy = allAtoms[i].y - allAtoms[j].y;
+            var distance = Math.sqrt(dx*dx + dy*dy);
+            if (distance < 1.0) {
+                var totalm = allAtoms[i].m + allAtoms[j].m;
+                allAtoms[i].xp = allAtoms[i].m/totalm*allAtoms[i].xp + allAtoms[j].m/totalm*allAtoms[j].xp;
+                allAtoms[i].yp = allAtoms[i].m/totalm*allAtoms[i].yp + allAtoms[j].m/totalm*allAtoms[j].yp;
+                allAtoms[i].m += allAtoms[j].m;
+                allAtoms[i].size += allAtoms[j].size;
+                console.log("merging " + i + " and " + j);
+                allAtoms = allAtoms.splice(j,1);
+            }
+        }
+    }
+}
 
 var newPosition=function(b, allAtoms) {
-
     var xpp = 0;
     var ypp = 0;
     for (var i = 0; i < allAtoms.length; i+=1) {
@@ -36,7 +55,6 @@ var newPosition=function(b, allAtoms) {
         xpp += -G*b1.m*(b.x-b1.x)/Math.pow(d1, 3);
         ypp += -G*b1.m*(b.y-b1.y)/Math.pow(d1, 3);
     }
-
     b.yp=b.yp+ypp*dt;
     b.xp=b.xp+xpp*dt;
     b.x=b.x+b.xp*dt;
@@ -50,11 +68,12 @@ var setup = function() {
 
 draw = function() {
     background(0,0,0);
-
     for (var i = 0; i < atoms.length; i++) {
         ellipse(atoms[i].x, atoms[i].y, atoms[i].size , atoms[i].size);
         atoms[i]=newPosition(atoms[i], atoms);
     }
+    mergeCloseAtoms(atoms);
+    console.log(atoms.length);
 };
 
 </script>
