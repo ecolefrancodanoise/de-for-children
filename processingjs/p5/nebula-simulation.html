@@ -43,23 +43,29 @@ var mergeCloseAtoms = function(allAtoms) {
     }
 }
 
-var newPosition=function(b, allAtoms) {
-    var xpp = 0;
-    var ypp = 0;
+var newPositions = function(allAtoms) {
+    var newAtoms = new Array(allAtoms.length);
     for (var i = 0; i < allAtoms.length; i+=1) {
-        var b1 = allAtoms[i];
-        if (b === b1) {
-            continue;
+        var b0 = allAtoms[i];
+        var xpp = 0;
+        var ypp = 0;
+        for (var j = 0; j < allAtoms.length; j+=1) {
+            var b1 = allAtoms[j];
+            if (i === j) {
+                continue;
+            }
+            var d1 = Math.sqrt((b1.x-b0.x)*(b1.x-b0.x) + (b1.y -b0.y)*(b1.y -b0.y));
+            xpp += -G*b1.m*(b0.x-b1.x)/Math.pow(d1, 3);
+            ypp += -G*b1.m*(b0.y-b1.y)/Math.pow(d1, 3);
         }
-        var d1=Math.sqrt((b1.x-b.x)*(b1.x-b.x) + (b1.y -b.y)*(b1.y -b.y));
-        xpp += -G*b1.m*(b.x-b1.x)/Math.pow(d1, 3);
-        ypp += -G*b1.m*(b.y-b1.y)/Math.pow(d1, 3);
+        var b = Object.assign({}, b0);
+        b.xp += xpp*dt;
+        b.yp += ypp*dt;
+        b.x += b.xp*dt;
+        b.y += b.yp*dt;
+        newAtoms[i] = b;
     }
-    b.yp=b.yp+ypp*dt;
-    b.xp=b.xp+xpp*dt;
-    b.x=b.x+b.xp*dt;
-    b.y=b.y+b.yp*dt;
-    return b;
+    return newAtoms;
 };
 
 var setup = function() {
@@ -70,8 +76,8 @@ draw = function() {
     background(0,0,0);
     for (var i = 0; i < atoms.length; i++) {
         ellipse(atoms[i].x, atoms[i].y, atoms[i].size , atoms[i].size);
-        atoms[i]=newPosition(atoms[i], atoms);
     }
+    atoms = newPositions(atoms);
     mergeCloseAtoms(atoms);
     console.log(atoms.length);
 };
