@@ -1,0 +1,58 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+<script>
+
+var canvasWidth = 1200;
+var canvasHeight = 800;
+
+var setup = function() {
+    createCanvas(canvasWidth, canvasHeight);
+}
+
+draw = function() {
+var ax=0;
+var vx=20;
+var x =0;
+var dt=0.1;
+draw = function() {
+    vx=vx+ax*dt;
+    x=x+vx*dt;
+    
+    
+if(x>200){
+    ax=-2*vx/dt;
+}
+else if(x<-50){
+    ax=-2*vx/dt;
+}
+else{
+ax=0;
+
+}
+background(0, 255, 242);
+ fill(255, 0, 204);
+ellipse(x+126, 198, 116, 74);
+ellipse(x+178, 157, 11, 23);
+ellipse(x+210, 157, 11, 23);
+ellipse(x+194, 197, 78, 79);
+ellipse(x+199, 205, 32, 32);
+ellipse(x+192, 205, 6, 9);
+ellipse(x+204, 205, 6, 9);
+ellipse(x+207, 181, 8, 12);
+ellipse(x+186, 181, 8, 12);
+ellipse(x+104, 240, 31, 26);
+ellipse(x+148, 240, 31, 26);
+line(x+69, 199, x+43, 179);
+point(x+185, 180);
+point(x+206, 180);
+
+};
+};
+
+</script>
+</body>
+</html>
