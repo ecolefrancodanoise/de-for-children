@@ -1,0 +1,88 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+</head>
+
+<body>
+<script>
+
+var canvasWidth = 1200;
+var canvasHeight = 800;
+
+var atoms = [];
+for (var i = 0; i < 30; i+=1) {
+    atoms.push (
+        {
+            size:30,
+            x:Math.random()*canvasWidth - canvasWidth / 2,
+            y:Math.random()*canvasHeight - canvasHeight / 2,
+            xp:Math.random()*100-50,
+            yp:Math.random()*100-50,
+            m:1e3
+        }
+    );
+}
+
+var dt =0.001;
+var G = 1;
+
+var newPositions = function(allAtoms) {
+    var newAtoms = new Array(allAtoms.length);
+    for (var i = 0; i < allAtoms.length; i+=1) {
+        var b0 = allAtoms[i];
+        var newb0 = Object.assign({}, b0);
+        for (var j = 0; j < allAtoms.length; j+=1) {
+            var b1 = allAtoms[j];
+            if (i === j) {
+                continue;
+            }
+
+            var d = Math.sqrt((b1.x-b0.x)*(b1.x-b0.x) + (b1.y -b0.y)*(b1.y -b0.y));
+            if (d < b1.size/2 + b0.size/2) {
+                var dotProductTerm = ((b0.xp - b1.xp) * (b0.x - b1.x) + (b0.yp - b1.yp) * (b0.y - b1.y)) / (d*d);
+                var vb0x = b0.xp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * (b0.x - b1.x); 
+                var vb0y = b0.yp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * (b0.y - b1.y); 
+                var v1x = b1.xp  - 2 * b0.m / (b0.m +  b1.m) * dotProductTerm * (b1.x - b0.x); 
+                var v1y = b1.yp  - 2 * b0.m / (b0.m +  b1.m) * dotProductTerm * (b1.y - b0.y); 
+                newb0.xp = vb0x;
+                newb0.yp = vb0y;
+            }
+
+            //molecules wrap around
+            if(newb0.x < -width/2) {
+                newb0.x = width/2
+            }
+            if(newb0.x > width/2) {
+                newb0.x = -width/2;
+            }
+            if(newb0.y < -height/2) {
+                newb0.y = height/2;
+            }
+            if(newb0.y > height/2) {
+                newb0.y = -height/2;
+            }
+            newb0.x += newb0.xp * dt;
+            newb0.y += newb0.yp * dt;        
+            newAtoms[i] = newb0;
+        } 
+    }
+    
+    return newAtoms;
+};
+
+var setup = function() {
+    createCanvas(canvasWidth, canvasHeight);
+}
+
+draw = function() {
+    background(0,0,0);
+    for (var i = 0; i < atoms.length; i++) {
+//         noStroke();
+        ellipse(atoms[i].x + canvasWidth/2, atoms[i].y + canvasHeight/2, atoms[i].size , atoms[i].size);
+    }
+    atoms = newPositions(atoms);
+};
+
+</script>
+</body>
+</html>
