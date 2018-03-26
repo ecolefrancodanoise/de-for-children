@@ -95,6 +95,19 @@ draw = function() {
         ellipse(atoms[i].x + canvasWidth/2, atoms[i].y + canvasHeight/2, atoms[i].size , atoms[i].size);
     }
     atoms = newPositions(atoms);
+
+    var kineticEnergy = atoms.reduce(function(accumulator, currentAtom) {
+        var speed2 = currentAtom.xp * currentAtom.xp + currentAtom.yp * currentAtom.yp;
+        return accumulator + 0.5 * currentAtom.m * speed2;
+    }, 0);
+    var potentialEnergy = atoms.reduce(function(accumulator, currentAtom) {
+        return accumulator - currentAtom.m*currentAtom.y;
+    }, 0);
+    var totalEnergy = kineticEnergy + potentialEnergy;
+    stroke(255);
+    text("Kinetic Energy    : " + Math.round(kineticEnergy), 20, 20);
+    text("Potential Energy : " + Math.round(potentialEnergy), 20, 40);
+    text("Total Energy       : " + Math.round(totalEnergy), 20, 60);
 };
 
 </script>
