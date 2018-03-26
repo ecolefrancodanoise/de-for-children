@@ -67,11 +67,12 @@ var newPositions = function(allAtoms) {
                 xpp = -2*newb0.xp/dt;
             }
             if(newb0.y < -height/2) {
-                ypp = -2*newb0.yp/dt;
+//                 Do nothing
             }
             if(newb0.y > height/2) {
                 ypp = -2*newb0.yp/dt;
             }
+            ypp += 1;
             newb0.xp += xpp*dt
             newb0.yp += ypp*dt
             newb0.x += newb0.xp * dt;
