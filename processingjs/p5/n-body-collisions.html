@@ -43,16 +43,20 @@ var newPositions = function(allAtoms) {
             var d = Math.sqrt(dx*dx + dy*dy);
             var radii = (b0.size + b1.size)/2;
             var dotProductTerm = (dvx * dx + dvy * dy);
+            var xpp = 0;
+            var ypp = 0;
+            var vb0x;
+            var vb0y;
             if (d < b1.size/2 + b0.size/2 && dotProductTerm < 0) {
                 //determine if objects are moving away from each other. If they are, don't collide.
                 //This is needed because the objects might be less than r1 + r2 apart but be moving away from each other
                 //(numerical impreciseness)
-                var vb0x = b0.xp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * dx / (radii*radii);
-                var vb0y = b0.yp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * dy / (radii*radii);
+                vb0x = b0.xp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * dx / (radii*radii);
+                vb0y = b0.yp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * dy / (radii*radii);
                 //var vb1x  = b1.xp  - 2 * b0.m / (b0.m +  b1.m) * dotProductTerm * (-dx) / (radii*radii); //not needed - will be calculated in other atom's pass
                 //var vb1y = b1.yp  - 2 * b0.m / (b0.m +  b1.m) * dotProductTerm * (-dy) / (radii*radii);
-                newb0.xp = vb0x;
-                newb0.yp = vb0y;
+                xpp += (-b0.xp + vb0x)/dt;
+                ypp += (-b0.yp + vb0y)/dt;
             }
 
             //molecules wrap around
@@ -68,6 +72,8 @@ var newPositions = function(allAtoms) {
             if(newb0.y > height/2) {
                 newb0.y = -height/2;
             }
+            newb0.xp += xpp*dt
+            newb0.yp += ypp*dt
             newb0.x += newb0.xp * dt;
             newb0.y += newb0.yp * dt;        
             newAtoms[i] = newb0;
