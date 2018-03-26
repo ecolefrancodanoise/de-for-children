@@ -61,16 +61,16 @@ var newPositions = function(allAtoms) {
 
             //molecules wrap around
             if(newb0.x < -width/2) {
-                newb0.x = width/2
+                xpp = -2*newb0.xp/dt
             }
             if(newb0.x > width/2) {
-                newb0.x = -width/2;
+                xpp = -2*newb0.xp/dt;
             }
             if(newb0.y < -height/2) {
-                newb0.y = height/2;
+                ypp = -2*newb0.yp/dt;
             }
             if(newb0.y > height/2) {
-                newb0.y = -height/2;
+                ypp = -2*newb0.yp/dt;
             }
             newb0.xp += xpp*dt
             newb0.yp += ypp*dt
