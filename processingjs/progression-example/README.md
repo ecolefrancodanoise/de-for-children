@@ -53,7 +53,7 @@ Extend the program such that both bodies now attract each other.
 
 Step 3: Three-body gravity
 --------------------------
-In step 2 we introduce a third body. In the previous step we needed to calculate a single distance, d.
+In this step we introduce a third body. In the previous step we needed to calculate a single distance, d.
 
 How many distances between the different bodies - how many variables - do we need to calculate now?
 
