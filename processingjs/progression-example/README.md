@@ -88,13 +88,13 @@ An then...
 
 Afterwards, you will be able to (teach the children how to):
 
-### simulate a solar system
-
-[![Solar System](images/solar-system.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/solar-system.html)
-
 ### explain air resistance
 
 [![Air Resistance](images/air-resistance.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/elastic-collisions.html)
+
+### simulate a solar system
+
+[![Solar System](images/solar-system.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/solar-system.html)
 
 ### simulate a trip to Mars
 
