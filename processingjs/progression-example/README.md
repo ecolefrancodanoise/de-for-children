@@ -94,27 +94,27 @@ Afterwards, you will be able to (teach the children how to):
 
 ### explain air resistance
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/elastic-collisions.html
+[![Air Resistance](images/air-resistance.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/elastic-collisions.html)
 
 ### simulate a trip to Mars
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/mars-trip.html
+[![Mars Trip](images/mars-trip.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/mars-trip.html)
 
 ### simulate an electron trajectory between two dihydrogen protons (paving the way for understanding quantum mechanics)
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/dihydrogen-cation.html
+[![Dihydrogen Cation](images/dihydrogen-cation.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/dihydrogen-cation.html)
 
 ### simulate an ecosystem consisting of predators and preys
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/predator-prey-model.html
+[![Predator-Prey](images/predator-prey.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/predator-prey-model.html)
 
 ### witness the beauty of star formation
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/nebula-simulation.html
+[![Star formation](images/nebula.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/nebula-simulation.html)
 
 ### understand how gases, liquids, pressure, heat etc. all work together
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/n-body-collisions.html
+[![N-body collisions](images/n-body-collisions.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/n-body-collisions.html)
 
 
 [to be continued]
