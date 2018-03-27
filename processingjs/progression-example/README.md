@@ -90,7 +90,7 @@ Afterwards, you will be able to (teach the children how to):
 
 ### simulate a solar system
 
-https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/solar-system.html
+[![Solar System](/images/solar-system.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/solar-system.html)
 
 ### explain air resistance
 
