@@ -80,3 +80,41 @@ Factor it into a function that can be called for each body.
 Step 5: Generalizing the code to N bodies
 -----------------------------------------
 Generate an array of bodies and make them all interact with each other.
+
+
+
+An then...
+----------
+
+Afterwards, you will be able to (teach the children how to):
+
+### simulate a solar system
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/solar-system.html
+
+### explain air resistance
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/elastic-collisions.html
+
+### simulate a trip to Mars
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/mars-trip.html
+
+### simulate an electron trajectory between two dihydrogen protons (paving the way for understanding quantum mechanics)
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/dihydrogen-cation.html
+
+### simulate an ecosystem consisting of predators and preys
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/predator-prey-model.html
+
+### witness the beauty of star formation
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/nebula-simulation.html
+
+### understand how gases, liquids, pressure, heat etc. all work together
+
+https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/n-body-collisions.html
+
+
+[to be continued]
