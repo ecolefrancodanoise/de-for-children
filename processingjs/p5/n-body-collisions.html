@@ -23,17 +23,24 @@ for (var i = 0; i < 30; i+=1) {
     );
 }
 
-var dt =0.001;
+var dt =0.1;
 var G = 1;
 
 var newPositions = function(allAtoms) {
     var newAtoms = new Array(allAtoms.length);
+    var collisionRegister = {};
     for (var i = 0; i < allAtoms.length; i+=1) {
         var b0 = allAtoms[i];
         var newb0 = Object.assign({}, b0);
+        var xpp = 0;
+        var ypp = 0;
         for (var j = 0; j < allAtoms.length; j+=1) {
             var b1 = allAtoms[j];
             if (i === j) {
+                continue;
+            }
+            if (i.toString() in collisionRegister && collisionRegister[i.toString()] != j.toString() ||
+            j.toString() in collisionRegister && collisionRegister[j.toString()] != i.toString()) {
                 continue;
             }
             var dvx = b0.xp - b1.xp;
@@ -42,12 +49,9 @@ var newPositions = function(allAtoms) {
             var dy = b0.y - b1.y;
             var d = Math.sqrt(dx*dx + dy*dy);
             var dotProductTerm = (dvx * dx + dvy * dy);
-            var xpp = 0;
-            var ypp = 0;
             var vb0x;
             var vb0y;
             if (d < b1.size/2 + b0.size/2 && dotProductTerm < 0) {
-            console.log("collision");
                 // dotProductTerm < 0 determines if objects are moving away from each other. If they are, don't collide.
                 //This is needed because the objects might be less than r1 + r2 apart but be moving away from each other
                 //(numerical impreciseness)
@@ -55,6 +59,8 @@ var newPositions = function(allAtoms) {
                 vb0y = b0.yp  - 2 * b1.m / (b0.m +  b1.m) * dotProductTerm * dy / (d*d);
                 xpp = (-b0.xp + vb0x)/dt;
                 ypp = (-b0.yp + vb0y)/dt;
+                collisionRegister[i] = j;
+                collisionRegister[j] = i;
                 break;
             }
         }
