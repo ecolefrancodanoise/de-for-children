@@ -116,5 +116,10 @@ Afterwards, you will be able to (teach the children how to):
 
 [![N-body collisions](images/n-body-collisions.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/n-body-collisions.html)
 
+### or simply a "cochon différentiel"
+
+[![Cochon differentiel](images/cochon-differentiel.jpg)](https://ecolefrancodanoise.github.io/de-for-children/processingjs/p5/cochon-differentiel.html)
+
+
 
 [to be continued]
